@@ -66,6 +66,6 @@ if you want to develop more database use  My SQL Workbench for easy to add more 
 
   and click go You should see a message saying
 
-  Import has been successfully finished".
+  Import has been successfully finished.
 
   This means you've import successfully to the database.
