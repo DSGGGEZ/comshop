@@ -52,7 +52,7 @@ if you want to develop more database use  My SQL Workbench for easy to add more 
 
 - Go your browser
   
-  Login php my admin on your browser";
+  Login php my admin on your browser
 
   Next
 
