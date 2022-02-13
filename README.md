@@ -32,11 +32,11 @@ First, check the required
   
 You can download Bitnami [here](https://bitnami.com)
 
-## Running the application. :bulb:	:bulb: :bulb: 
+## Running the application. :bulb: :bulb: :bulb: 
 
 You go to your browser and paste url `http://localhost:8080` will see the web application runs at `http://localhost:8080`
 
-### Database setup (ComShop API). :card_index_dividers:
+### Database setup (ComShop API) :card_index_dividers:
 **Reminder: this topic needs to be done only once.**
 
 At ComSop, we use [MySQL Workbench](https://www.mysql.com/products/workbench/) to store user data and credentials, this section will teach you how to set up the database locally. But first of all
