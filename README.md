@@ -34,7 +34,7 @@ You can download Bitnami [here](https://bitnami.com)
 
 ## Running the application. :bulb: :bulb: :bulb: 
 
-You go to your browser and paste url `http://localhost:8080` will see the web application runs at `http://localhost:8080`
+You go to your browser and paste url `http://localhost:8080/name your project folder` will see the web application runs at `http://localhost:8080/name your project folder`
 
 ### Database setup (ComShop API) :card_index_dividers:
 **Reminder: this topic needs to be done only once.**
