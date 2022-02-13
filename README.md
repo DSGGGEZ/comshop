@@ -9,7 +9,7 @@ Our project consists of
 - comshop API: Backend application API with MySQL Workbench.
 
 ## Technology stack. :sparkles: :sparkles:  :sparkles:
-### reservation movie theater
+### ComShop
 - :white_check_mark: [HTML](https://html.com) for creating frontend application.
 - :white_check_mark: [JavaScript](https://www.javascript.com) for building our frontend HTML application
 - :white_check_mark: [Bootstrap](https://getbootstrap.com) for styling our application.
