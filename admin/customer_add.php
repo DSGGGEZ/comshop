@@ -3,6 +3,7 @@
 
 	if(isset($_POST['add'])){
 		$cid = $_POST['CID'];
+		$password = $_POST['password'];
 		$firstname = $_POST['FirstName'];
 		$lastname = $_POST['LastName'];
 		$address = $_POST['Address'];
@@ -10,7 +11,7 @@
 		$zipcode = $_POST['Zipcode'];
 		$balance = $_POST['Balance'];
 		
-		$sql = "INSERT INTO customer(CID, FirstName, LastName, Address, District, Zipcode, Balance) VALUES ('$cid' , '$firstname', '$lastname', '$address', '$district', '$zipcode' , '$balance')";
+		$sql = "INSERT INTO customer(CID,password, FirstName, LastName, Address, District, Zipcode, Balance) VALUES ('$cid' ,'$password','$firstname', '$lastname', '$address', '$district', '$zipcode' , '$balance')";
 		if($conn->query($sql)){
 			$_SESSION['success'] = 'Customer added successfully';
 		}

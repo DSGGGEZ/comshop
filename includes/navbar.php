@@ -11,19 +11,17 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
         <ul class="nav navbar-nav">
+          <li><a href='index.php'>Product</a></li>
           <?php
             if(isset($_SESSION['customer'])){
               echo "
-                <li><a href='index.php'>HOME</a></li>
+                <li><a href='productlist.php'>Waranty</a></li>
+                <li><a href='fixordercus.php'>Fixorder</a></li>
               ";
             }
           ?>
         </ul>
       </div>
-      <ul class="nav navbar-nav">
-          <li <?php echo $product == 'index' ? 'class="active"' : '' ?> ><a href="productlist.php">Products <span class="sr-only">(current)</span></a></li>
-          <li <?php echo $fix == 'index' ? 'class="active"' : '' ?> ><a href="fixordercus.php">Fix <span class="sr-only">(current)</span></a></li>
-        </ul>
       <!-- /.navbar-collapse -->
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
@@ -35,7 +33,6 @@
                 <li class='user user-menu'>
                   <a href='#'>
                     <img src='images/U01.jpg' class='user-image' alt='User Image'>
-                    <span class='hidden-xs'>".$customer['firstname'].' '.$customer['lastname']."</span>
                   </a>
                 </li>
                 <li><a href='logout.php'><i class='fa fa-sign-out'></i> LOGOUT</a></li>

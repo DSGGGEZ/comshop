@@ -90,12 +90,7 @@
                     $sql = "SELECT * FROM product ORDER BY PID";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
-                      if($row['barstat']){
-                        $status = '<span class="label label-success">returned</span>';
-                      }
-                      else{
-                        $status = '<span class="label label-danger">not returned</span>';
-                      }
+
                       echo "
                         <tr>
                           <td class='hidden'></td>

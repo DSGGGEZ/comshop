@@ -1,3 +1,8 @@
+<?php
+if(!isset($conn)){
+  include 'includes/conn.php';
+}
+?>
 <!-- Add -->
 <div class="modal fade" id="addnew">
     <div class="modal-dialog">
@@ -13,28 +18,33 @@
                 <div class="form-group">
                     <label for="name" class="col-sm-3 control-label">CustomerID</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="CID" name="CID" required>
+                    <select class="form-control" name="CID" id="CID" required="">
+                        <option value="" selected="" disabled=""></option>
+                        <?php  
+                            $cid = "SELECT * FROM customer";
+                            $cqry = $conn->query($cid);
+                            while($row = $cqry->fetch_array()):
+                        ?>
+                          <option value="<?php echo $row['CID'] ?>"><?php echo ucwords($row['FirstName'].' '.$row['LastName']) . ' ['.$row['CID'].']' ?></option>
+                        <?php endwhile;  ?>
+                      </select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="name" class="col-sm-3 control-label">ProductID</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="PID" name="PID" required>
+                    <select class="form-control" name="PID" id="PID" required="">
+                        <option value="" selected="" disabled=""></option>
+                        <?php  
+                            $pid = "SELECT * FROM product";
+                            $pqry = $conn->query($pid);
+                            while($row = $pqry->fetch_array()):
+                        ?>
+                          <option value="<?php echo $row['PID'] ?>"><?php echo ucwords($row['ProductType'].' '.$row['Brand']) . ' ['.$row['Spec'].']' ?></option>
+                        <?php endwhile;  ?>
+                      </select>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="name" class="col-sm-3 control-label">WarantyDate</label>
-                    <div class="col-sm-9">
-                      <input type="date" class="form-control" id="BoughtDate" name="BoughtDate" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="name" class="col-sm-3 control-label">WarantyExpire</label>
-                    <div class="col-sm-9">
-                      <input type="date" class="form-control" id="WarantyExpire" name="WarantyExpire" required>
-                    </div>
-                </div>
-            </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
               <button type="submit" class="btn btn-primary btn-flat" name="add"><i class="fa fa-save"></i> Save</button>

@@ -4,13 +4,6 @@
 		header('index.php');
 	}
 ?>
-<?php
-	$where = '';
-	if(isset($_GET['CID'])){
-		$cid = $_GET['CID'];
-		$where = 'WHERE iteminaccount.id = '.$cid;
-	}
-?>
 <?php include 'includes/header.php'; ?>
 <body class="hold-transition skin-blue layout-top-nav">
 <div class="wrapper">
@@ -27,12 +20,6 @@
 				<div class="box">
 	        			<div class="box-header with-border">
 							<h3>In Account List</h3>
-	        				<div class="input-group">
-				                <input type="text" class="form-control input-lg" id="searchBox" placeholder="Search for Brand , Spec or Type" value="<?=$_GET["txtKeyword"];?>">
-				                <span class="input-group-btn">
-				                    <button type="button" class="btn btn-primary btn-flat btn-lg"><i class="fa fa-search"></i> </button>
-				                </span>
-				            </div>
 	        			</div>
 	        			<div class="box-body">
 	        				
@@ -44,22 +31,28 @@
 			        				<th>Type</th>
 									<th>BoughtDate</th>
 									<th>WarantyExpire</th>
+									<th>Status</th>
 			        			</thead>
 			        			<tbody>
 			        			<?php
-									$cid = $_SESSION['CID'];
-			        				$sql = "SELECT * FROM iteminaccount LEFT JOIN customer ON customer.CID=iteminaccount.CID LEFT JOIN product ON product.PID = iteminaccount.PID ORDER BY iteminaccount.CID";
+									$cid=$_SESSION['customer'];
+			        				$sql = "SELECT * FROM iteminaccount LEFT JOIN customer ON customer.CID=iteminaccount.CID LEFT JOIN product ON product.PID = iteminaccount.PID WHERE iteminaccount.CID='$cid' ORDER BY iteminaccount.CID ";
 			        				$query = $conn->query($sql);
 			        				while($row = $query->fetch_assoc()){
+										if($row['WarantyExpire']==date('Y-m-d'))
+										$status = 'Expired';
+										else{
+										$status = 'In waranty';
+										}
 			        					echo "
 			        						<tr>
-												<td>".$row['CID']."</td>
 												<td>".$row['PID']."</td>
 												<td>".$row['Brand']."</td>
 												<td>".$row['Spec']."</td>
 												<td>".$row['ProductType']."</td>
 												<td>".$row['BoughtDate']."</td>
 												<td>".$row['WarantyExpire']."</td>
+												<td>".$status."</td>
 			        						</tr>
 			        					";
 			        				}

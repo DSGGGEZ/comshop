@@ -4,13 +4,6 @@
 		header('index.php');
 	}
 ?>
-<?php
-	$where = '';
-	if(isset($_GET['CID'])){
-		$cid = $_GET['CID'];
-		$where = 'WHERE iteminaccount.id = '.$cid;
-	}
-?>
 <?php include 'includes/header.php'; ?>
 <body class="hold-transition skin-blue layout-top-nav">
 <div class="wrapper">
@@ -26,13 +19,7 @@
 	        	<div class="col-sm-10 col-sm-offset-1">
 				<div class="box">
 	        			<div class="box-header with-border">
-							<h3>In Account List</h3>
-	        				<div class="input-group">
-				                <input type="text" class="form-control input-lg" id="searchBox" placeholder="Search for Brand , Spec or Type" value="<?=$_GET["txtKeyword"];?>">
-				                <span class="input-group-btn">
-				                    <button type="button" class="btn btn-primary btn-flat btn-lg"><i class="fa fa-search"></i> </button>
-				                </span>
-				            </div>
+							<h3>Fix Order <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat pull-right"><i class="fa fa-plus"></i> New</a></h3>
 	        			</div>
 	        			<div class="box-body">
 	        				
@@ -46,8 +33,8 @@
 			        			</thead>
 			        			<tbody>
 			        			<?php
-									$cid = $_SESSION['CID'];
-			        				$sql = "SELECT * FROM fixorder LEFT JOIN customer ON customer.CID=fixorder.CID LEFT JOIN comtech ON comtech.CTID = fixorder.CTID";
+									$cid=$_SESSION['customer'];
+			        				$sql = "SELECT * FROM fixorder LEFT JOIN customer ON customer.CID=fixorder.CID LEFT JOIN comtech ON comtech.CTID = fixorder.CTID WHERE fixorder.CID='$cid'";
 			        				$query = $conn->query($sql);
 			        				while($row = $query->fetch_assoc()){
 			        					echo "
@@ -74,8 +61,8 @@
 
   	<?php include 'includes/footer.php'; ?>
 </div>
-
 <?php include 'includes/scripts.php'; ?>
+<?php include 'includes/fixorder_modal.php'; ?>
 <script>
 	$('#transelect').on('change', function(){
 		var action = $(this).val();

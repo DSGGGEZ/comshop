@@ -66,7 +66,7 @@
                     $sql = "SELECT * FROM customer ORDER BY CID";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
-                      $photo = (!empty($row['photo'])) ? '../images/'.$row['photo'] : '../images/profile.jpg';
+                      $photo = (!empty($row['photo'])) ? '../images/'.$row['photo'] : '../images/U01.jpg';
                       echo "
                         <tr>
                           <td>
@@ -134,6 +134,7 @@ function getRow(id){
     success: function(response){
       $('.id').val(response.id);
       $('#edit_CID').val(response.CID);
+      $('#edit_password').val(response.password);
       $('#edit_FirstName').val(response.FirstName);
       $('#edit_LastName').val(response.LastName);
       $('#edit_Address').val(response.Address);

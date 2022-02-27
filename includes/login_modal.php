@@ -12,9 +12,14 @@
               <form class="form-horizontal" method="POST" action="login.php">
                 <div class="form-group">
                     <label for="customer" class="col-sm-3 control-label">Customer ID</label>
-
                     <div class="col-sm-9">
                       <input type="text" class="form-control" id="CID" name="CID" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name" class="col-sm-3 control-label">password</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="password" name="password" required>
                     </div>
                 </div>
             </div>

@@ -84,10 +84,10 @@
                 echo "<h3>".$query->num_rows."</h3>";
               ?>
           
-              <p>Total Customer</p>
+              <p>Fix Order</p>
             </div>
             <div class="icon">
-            <i class="fa fa-users"></i>
+            <i class="fa fa-wrench"></i>
             </div>
             <a href="customer.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
@@ -104,10 +104,10 @@
                 echo "<h3>".$query->num_rows."</h3>";
               ?>
              
-              <p>Fix Today</p>
+              <p>Total Customer</p>
             </div>
             <div class="icon">
-              <i class="fa fa-wrench"></i>
+              <i class="fa fa-users"></i>
             </div>
             <a href="fixorder.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>

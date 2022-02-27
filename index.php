@@ -1,11 +1,4 @@
 <?php include 'includes/session.php'; ?>
-<?php
-	$where = '';
-	if(isset($_GET['category'])){
-		$catid = $_GET['category'];
-		$where = 'WHERE category_id = '.$catid;
-	}
-?>
 <?php include 'includes/header.php'; ?>
 <body class="hold-transition skin-blue layout-top-nav">
 <div class="wrapper">
@@ -30,16 +23,13 @@
 	        			}
 	        		?>
 	        		<div class="box">
+					<div class="box-header with-border">
+							<h3>Product List</h3>
+	        			</div>
 	        			<div class="box-header with-border">
-	        				<div class="input-group">
-				                <input type="text" class="form-control input-lg" id="searchBox" placeholder="Search for Brand , Spec or Type" value="<?=$_GET["txtKeyword"];?>">
-				                <span class="input-group-btn">
-				                    <button type="button" class="btn btn-primary btn-flat btn-lg"><i class="fa fa-search"></i> </button>
-				                </span>
-				            </div>
 	        			</div>
 	        			<div class="box-body">
-	        				
+							
 	        				<table class="table table-bordered table-striped" id="booklist">
 			        			<thead>
 			        				<th>Brand</th>
@@ -50,23 +40,22 @@
 			        			</thead>
 			        			<tbody>
 			        			<?php
-			        				$sql = "SELECT * FROM product $where";
+			        				$sql = "SELECT * FROM product";
 			        				$query = $conn->query($sql);
 			        				while($row = $query->fetch_assoc()){
-			        					$status = ($row['status'] == 0) ? '<span class="label label-success">available</span>' : '<span class="label label-danger">not available</span>';
-			        					echo "
-			        						<tr>
-			        							<td>".$row['Brand']."</td>
-			        							<td>".$row['Spec']."</td>
-												<td>".$row['ProductType']."</td>
-												<td>".$row['Price']."</td>
-												<td>
-													<button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='fa fa-shopping-cart'></i> Add to Account</button>
-												</td>
-			        						</tr>
-			        					";
-			        				}
-			        			?>
+									?>
+			        					<tr>
+			        						<td><?php echo $row['Brand']?></td>
+			        						<td><?php echo $row['Spec']?></td>
+											<td><?php echo $row['ProductType']?></td>
+											<td><?php echo $row['Price']?></td>
+											<td>
+												<a href="buy.php?PID=<?php echo $row['PID'] ?>?price=<?php echo $row['Price'] ?>" class="btn btn-success" role="button">Buy now</a>
+											</td>
+			        					</tr>
+										<?php
+										}
+									?>
 			        			</tbody>
 			        		</table>
 	        			</div>
@@ -80,20 +69,40 @@
 
   	<?php include 'includes/footer.php'; ?>
 </div>
-
 <?php include 'includes/scripts.php'; ?>
 <script>
 $(function(){
-	$('#catlist').on('change', function(){
-		if($(this).val() == 0){
-			window.location = 'index.php';
-		}
-		else{
-			window.location = 'index.php?category='+$(this).val();
-		}
+  $(document).on('click', '.edit', function(e){
+    e.preventDefault();
+    $('#edit').modal('show');
+    var id = $(this).data('id');
+    getRow(id);
+  });
 
-	});
+  $(document).on('click', '.delete', function(e){
+    e.preventDefault();
+    $('#delete').modal('show');
+    var id = $(this).data('id');
+    getRow(id);
+  });
 });
+
+function getRow(id){
+  $.ajax({
+    type: 'POST',
+    url: 'buy_row.php',
+    data: {id:id},
+    dataType: 'json',
+    success: function(response){
+      $('.id').val(response.id);
+      $('#edit_PID').val(response.PID);
+      $('#edit_CID').val(response.CID);
+      $('#edit_BoughtDate').val(response.BoughtDate);
+      $('#edit_WarantyExpire').val(response.WarantyExpire);
+      $('.del_war').html(response.PID+' '+response.CID+' '+response.Spec);
+    }
+  });
+}
 </script>
 </body>
 </html>

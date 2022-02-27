@@ -62,12 +62,18 @@
                   <th>ProductType</th>
                   <th>WarantyDate</th>
                   <th>WarantyExpire</th>
+                  <th>Status</th>
                 </thead>
                 <tbody>
                   <?php
                     $sql = "SELECT * FROM iteminaccount LEFT JOIN customer ON customer.CID=iteminaccount.CID LEFT JOIN product ON product.PID = iteminaccount.PID ORDER BY iteminaccount.CID ASC";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
+                    if($row['WarantyExpire']==date('Y-m-d'))
+                      $status = 'Expired';
+                    else{
+                      $status = 'In waranty';
+                    }
                       echo "
                         <tr>
                           <td class='hidden'></td>
@@ -78,10 +84,7 @@
                           <td>".$row['ProductType']."</td>
                           <td>".$row['BoughtDate']."</td>
                           <td>".$row['WarantyExpire']."</td>
-                          <td>
-                            <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
-                            <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
-                          </td>
+                          <td>".$status."</td>
                         </tr>
                       ";
                     }

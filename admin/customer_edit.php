@@ -4,6 +4,7 @@
 	if(isset($_POST['edit'])){
 		$id = $_POST['id'];
 		$cid = $_POST['CID'];
+		$password = $_POST['password'];
 		$firstname = $_POST['FirstName'];
 		$lastname = $_POST['LastName'];
 		$address = $_POST['Address'];
@@ -11,7 +12,7 @@
 		$zipcode = $_POST['Zipcode'];
 		$balance = $_POST['Balance'];
 
-		$sql = "UPDATE customer SET CID = '$cid', FirstName = '$firstname', LastName = '$lastname', Address = '$address', District = '$district', Zipcode = '$zipcode' , Balance = '$balance' WHERE id='$id'";
+		$sql = "UPDATE customer SET CID = '$cid',password = '$password', FirstName = '$firstname', LastName = '$lastname', Address = '$address', District = '$district', Zipcode = '$zipcode' , Balance = '$balance' WHERE id='$id'";
 		if($conn->query($sql)){
 			$_SESSION['success'] = 'Customer updated successfully';
 		}

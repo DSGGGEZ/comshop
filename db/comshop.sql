@@ -42,7 +42,7 @@ CREATE TABLE Product(
     Spec VARCHAR(30),
     ProductType VARCHAR(30),
     Price CHAR(7),
-    WaratyPeriod INT(3),
+    WarantyPeriod INT(3),
     PRIMARY KEY(id)
 );
 

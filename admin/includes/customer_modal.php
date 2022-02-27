@@ -17,6 +17,12 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="name" class="col-sm-3 control-label">password</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="password" name="password" required>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="name" class="col-sm-3 control-label">FirstName</label>
                     <div class="col-sm-9">
                       <input type="text" class="form-control" id="FirstName" name="FirstName" required>
@@ -78,6 +84,12 @@
                     <label for="name" class="col-sm-3 control-label">CID</label>
                     <div class="col-sm-9">
                       <input type="text" class="form-control" id="edit_CID" name="CID" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name" class="col-sm-3 control-label">password</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="edit_password" name="password" required>
                     </div>
                 </div>
                 <div class="form-group">

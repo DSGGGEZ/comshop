@@ -1,9 +1,9 @@
 <?php
 	include 'includes/session.php';
 
-	if(isset($_POST['add'])){
+	if(isset($_POST['addorder'])){
 		$ctid = $_POST['CTID'];
-		$cid = $_POST['CID'];
+		$cid = $_SESSION['customer'];
 		$caseid = $_POST['CaseID'];
 		$casedate =  $_POST['CaseDate'];
 		$casetype = $_POST['CaseType'];
@@ -22,5 +22,5 @@
 		$_SESSION['error'] = 'Fill up add form first';
 	}
 
-	header('location: fixorder.php');
+	header('location: index.php');
 ?>

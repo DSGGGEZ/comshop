@@ -56,7 +56,6 @@
             <div class="box-body">
               <table id="example1" class="table table-bordered">
                 <thead>
-                  <th>OrderID</th>
                   <th>CTID</th>
                   <th>CID</th>
                   <th>CaseID</th>
@@ -69,22 +68,14 @@
                     $sql = "SELECT * FROM fixorder ORDER BY CaseDate";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
-                      if($row['status']){
-                        $status = '<span class="label label-danger">Completed</span>';
-                      }
-                      else{
-                        $status = '<span class="label label-success">Working</span>';
-                      }
                       echo "
                         <tr>
-                          <td>".$row['OrderID']."</td>
                           <td>".$row['CTID']."</td>
                           <td>".$row['CID']."</td>
                           <td>".$row['CaseID']."</td>
                           <td>".$row['CaseDate']."</td>
                           <td>".$row['CaseType']."</td>
                           <td>".$row['Detail']."</td>
-                          <td>".$status."</td>
                           <td>
                             <button class='btn btn-success btn-sm com btn-flat' data-id='".$row['id']."'><i class='fa fa-check'></i> Complete</button>
                             <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Reject</button>
