@@ -5,7 +5,7 @@
 		$ctid = $_POST['CTID'];
 		$cid = $_SESSION['customer'];
 		$caseid = $_POST['CaseID'];
-		$casedate =  $_POST['CaseDate'];
+		$casedate = date('Y-m-d');
 		$casetype = $_POST['CaseType'];
 		$detail = $_POST['Detail'];
 		
