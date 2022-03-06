@@ -56,23 +56,25 @@
             <div class="box-body">
               <table id="example1" class="table table-bordered">
                 <thead>
+                  <th>OrderID</th>
+                  <th>CaseID</th>
                   <th>CTID</th>
                   <th>CID</th>
-                  <th>CaseID</th>
                   <th>CaseDate</th>
                   <th>CaseType</th>
                   <th>Detail</th>
                 </thead>
                 <tbody>
                   <?php
-                    $sql = "SELECT * FROM fixorder ORDER BY CaseDate";
+                    $sql = "SELECT * FROM fixorder ORDER BY OrderID";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
                       echo "
                         <tr>
+                          <td>".$row['OrderID']."</td>
+                          <td>".$row['CaseID']."</td>
                           <td>".$row['CTID']."</td>
                           <td>".$row['CID']."</td>
-                          <td>".$row['CaseID']."</td>
                           <td>".$row['CaseDate']."</td>
                           <td>".$row['CaseType']."</td>
                           <td>".$row['Detail']."</td>
@@ -132,8 +134,8 @@ function getRow(id){
     dataType: 'json',
     success: function(response){
       $('.id').val(response.id);
-      $('#com_fo').html('Finish order '+response.OrderID+' of Customer '+response.CID);
-      $('#del_fo').html('Reject order '+response.OrderID+' of Customer '+response.CID);
+      $('#com_fo').html('Finish order '+response.OrderID+' of Customer '+response.comtech_id );
+      $('#del_fo').html('Reject order '+response.OrderID+' of Customer '+response.comtech_id );
     }
   });
 }

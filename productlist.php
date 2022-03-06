@@ -4,6 +4,13 @@
 		header('index.php');
 	}
 ?>
+<?php
+	$where = '';
+	if(isset($_GET['CID'])){
+		$cid = $_GET['CID'];
+		$where = 'WHERE iteminaccount.id = '.$cid;
+	}
+?>
 <?php include 'includes/header.php'; ?>
 <body class="hold-transition skin-blue layout-top-nav">
 <div class="wrapper">
@@ -18,8 +25,24 @@
 	        <div class="row">
 	        	<div class="col-sm-10 col-sm-offset-1">
 				<div class="box">
-	        			<div class="box-header with-border">
+	        				<div class="box-header with-border">
 							<h3>In Account List</h3>
+	        				<?php
+										if (isset($_POST['search'])) {
+											$search = $_POST['search'];
+											$sql = "SELECT * FROM product WHERE brand LIKE '%$search%'";
+										} else {
+											$sql  = "SELECT * FROM product $where";
+										}
+										$query = $conn->query($sql)
+										?>
+										<form action="" method="post">
+											<div class="input-group">
+												<div class="form-outline"> <input type="search" id="search" name="search" class="form-control" placeholder="Search by movie name" value="<?php echo @$_POST['search']; ?>" /> </div>
+												<span class="input-group-btn">
+												<button type="submit" class="btn btn-primary">serch</button>
+												</span>
+											</div>
 	        			</div>
 	        			<div class="box-body">
 	        				
@@ -31,28 +54,21 @@
 			        				<th>Type</th>
 									<th>BoughtDate</th>
 									<th>WarantyExpire</th>
-									<th>Status</th>
 			        			</thead>
 			        			<tbody>
 			        			<?php
-									$cid=$_SESSION['customer'];
-			        				$sql = "SELECT * FROM iteminaccount LEFT JOIN customer ON customer.CID=iteminaccount.CID LEFT JOIN product ON product.PID = iteminaccount.PID WHERE iteminaccount.CID='$cid' ORDER BY iteminaccount.CID ";
+			        				$sql = "SELECT * FROM iteminaccount LEFT JOIN customer ON customer.CID=iteminaccount.CID LEFT JOIN product ON product.PID = iteminaccount.PID ORDER BY iteminaccount.CID";
 			        				$query = $conn->query($sql);
 			        				while($row = $query->fetch_assoc()){
-										if($row['WarantyExpire']==date('Y-m-d'))
-										$status = 'Expired';
-										else{
-										$status = 'In waranty';
-										}
 			        					echo "
 			        						<tr>
+												<td>".$row['CID']."</td>
 												<td>".$row['PID']."</td>
 												<td>".$row['Brand']."</td>
 												<td>".$row['Spec']."</td>
 												<td>".$row['ProductType']."</td>
 												<td>".$row['BoughtDate']."</td>
 												<td>".$row['WarantyExpire']."</td>
-												<td>".$status."</td>
 			        						</tr>
 			        					";
 			        				}

@@ -52,7 +52,6 @@
             <div class="box-body">
               <table id="example1" class="table table-bordered">
                 <thead>
-                  <th>Profile</th>
                   <th>CID</th>
                   <th>FirstName</th>
                   <th>LastName</th>
@@ -66,13 +65,8 @@
                     $sql = "SELECT * FROM customer ORDER BY CID";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
-                      $photo = (!empty($row['photo'])) ? '../images/'.$row['photo'] : '../images/U01.jpg';
                       echo "
                         <tr>
-                          <td>
-                            <img src='".$photo."' width='30px' height='30px'>
-                            <a href='#edit_photo' data-toggle='modal' class='pull-right photo' data-id='".$row['id']."'><span class='fa fa-edit'></span></a>
-                          </td>
                           <td>".$row['CID']."</td>
                           <td>".$row['FirstName']."</td>
                           <td>".$row['LastName']."</td>
@@ -134,7 +128,6 @@ function getRow(id){
     success: function(response){
       $('.id').val(response.id);
       $('#edit_CID').val(response.CID);
-      $('#edit_password').val(response.password);
       $('#edit_FirstName').val(response.FirstName);
       $('#edit_LastName').val(response.LastName);
       $('#edit_Address').val(response.Address);

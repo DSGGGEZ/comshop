@@ -84,10 +84,10 @@
                 echo "<h3>".$query->num_rows."</h3>";
               ?>
           
-              <p>Fix Order</p>
+              <p>Total Customer</p>
             </div>
             <div class="icon">
-            <i class="fa fa-wrench"></i>
+            <i class="fa fa-users"></i>
             </div>
             <a href="customer.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
@@ -104,10 +104,10 @@
                 echo "<h3>".$query->num_rows."</h3>";
               ?>
              
-              <p>Total Customer</p>
+              <p>Fix Today</p>
             </div>
             <div class="icon">
-              <i class="fa fa-users"></i>
+              <i class="fa fa-wrench"></i>
             </div>
             <a href="fixorder.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
@@ -134,40 +134,6 @@
         </div>
         <!-- ./col -->
       </div>
-      <!-- /.row -->
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="box">
-            <div class="box-header with-border">
-              <h3 class="box-title">Monthly Fixorder Report</h3>
-              <div class="box-tools pull-right">
-                <form class="form-inline">
-                  <div class="form-group">
-                    <label>Select Year: </label>
-                    <select class="form-control input-sm" id="select_year">
-                      <?php
-                        for($i=2015; $i<=2065; $i++){
-                          $selected = ($i==$year)?'selected':'';
-                          echo "
-                            <option value='".$i."' ".$selected.">".$i."</option>
-                          ";
-                        }
-                      ?>
-                    </select>
-                  </div>
-                </form>
-              </div>
-            </div>
-            <div class="box-body">
-              <div class="chart">
-                <br>
-                <canvas id="barChart" style="height:350px"></canvas>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       </section>
       <!-- right col -->
     </div>
@@ -175,29 +141,6 @@
 
 </div>
 <!-- ./wrapper -->
-
-<!-- Chart Data -->
-<?php
-  $and = 'AND YEAR(date) = '.$year;
-  $months = array();
-  $return = array();
-  $borrow = array();
-  for( $m = 1; $m <= 12; $m++ ) {
-    $sql = "SELECT * FROM fixorder WHERE MONTH(CaseDate) = '$m' AND YEAR(CaseDate) = '$year'";
-    $rquery = $conn->query($sql);
-    array_push($return, $rquery->num_rows);
-
-    $num = str_pad( $m, 2, 0, STR_PAD_LEFT );
-    $month =  date('M', mktime(0, 0, 0, $m, 1));
-    array_push($months, $month);
-  }
-
-  $months = json_encode($months);
-  $return = json_encode($return);
-  $borrow = json_encode($borrow);
-
-?>
-<!-- End Chart Data -->
 <?php include 'includes/scripts.php'; ?>
 <script>
 $(function(){

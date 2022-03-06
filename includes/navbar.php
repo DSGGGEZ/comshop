@@ -7,13 +7,13 @@
           <i class="fa fa-bars"></i>
         </button>
       </div>
-      
+
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
         <ul class="nav navbar-nav">
           <li><a href='index.php'>Product</a></li>
           <?php
-            if(isset($_SESSION['customer'])){
+            if(isset($_SESSION['customer'])){ 
               echo "
                 <li><a href='productlist.php'>Waranty</a></li>
                 <li><a href='fixordercus.php'>Fixorder</a></li>
@@ -45,11 +45,11 @@
             }
           ?>
       </div>
-      
+
       <!-- /.navbar-custom-menu -->
     </div>
     <!-- /.container-fluid -->
-    
+
   </nav>
 </header>
 <?php include 'includes/login_modal.php'; ?>

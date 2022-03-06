@@ -3,7 +3,7 @@
       <div class="pull-right hidden-xs">
         <b>DSGGGEZ</b>
       </div>
-      <strong>Have a good day <?php print_r($_SESSION['customer']);?></strong>
+      <strong>Have a good day</strong>
     </div>
     <!-- /.container -->
 </footer>
