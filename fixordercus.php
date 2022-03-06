@@ -4,6 +4,13 @@
 		header('index.php');
 	}
 ?>
+<?php
+	$where = '';
+	if(isset($_GET['CID'])){
+		$cid = $_GET['CID'];
+		$where = 'WHERE iteminaccount.id = '.$cid;
+	}
+?>
 <?php include 'includes/header.php'; ?>
 <body class="hold-transition skin-blue layout-top-nav">
 <div class="wrapper">
@@ -19,7 +26,23 @@
 	        	<div class="col-sm-10 col-sm-offset-1">
 				<div class="box">
 	        			<div class="box-header with-border">
-							<h3>Fix Order <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat pull-right"><i class="fa fa-plus"></i> New</a></h3>
+							<h3>In Account List</h3>
+	        				<?php
+										if (isset($_POST['search'])) {
+											$search = $_POST['search'];
+											$sql = "SELECT * FROM product WHERE Brand LIKE '%$search%'";
+										} else {
+											$sql  = "SELECT * FROM product $where";
+										}
+										$query = $conn->query($sql)
+										?>
+										<form action="" method="post">
+											<div class="input-group">
+												<div class="form-outline"> <input type="search" id="search" name="search" class="form-control" placeholder="Search by movie name" value="<?php echo @$_POST['search']; ?>" /> </div>
+												<span class="input-group-btn">
+												<button type="submit" class="btn btn-primary">serch</button>
+												</span>
+											</div>
 	        			</div>
 	        			<div class="box-body">
 	        				
@@ -33,15 +56,14 @@
 			        			</thead>
 			        			<tbody>
 			        			<?php
-									$cid=$_SESSION['customer'];
-			        				$sql = "SELECT * FROM fixorder LEFT JOIN customer ON customer.CID=fixorder.CID LEFT JOIN comtech ON comtech.CTID = fixorder.CTID WHERE fixorder.CID='$cid'";
+			        				$sql = "SELECT * FROM fixorder LEFT JOIN customer ON customer.CID=fixorder.CID LEFT JOIN comtech ON comtech.CTID = fixorder.CTID";
 			        				$query = $conn->query($sql);
 			        				while($row = $query->fetch_assoc()){
 			        					echo "
 			        						<tr>
 												<td>".$row['CID']."</td>
 												<td>".$row['CTID']."</td>
-												<td>".$row['CaseID']."</td>
+												<td>".$row['OrderID']."</td>
 												<td>".$row['CaseType']."</td>
 												<td>".$row['CaseDate']."</td>
 			        						</tr>
@@ -61,8 +83,8 @@
 
   	<?php include 'includes/footer.php'; ?>
 </div>
+
 <?php include 'includes/scripts.php'; ?>
-<?php include 'includes/fixorder_modal.php'; ?>
 <script>
 	$('#transelect').on('change', function(){
 		var action = $(this).val();

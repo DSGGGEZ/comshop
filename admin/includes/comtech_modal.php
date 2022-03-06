@@ -11,7 +11,7 @@
               <form class="form-horizontal" method="POST" action="comtech_add.php">
             
                 <div class="form-group">
-                    <label for="name" class="col-sm-3 control-label">CID</label>
+                    <label for="name" class="col-sm-3 control-label">CTID</label>
                     <div class="col-sm-9">
                       <input type="text" class="form-control" id="CTID" name="CTID" required>
                     </div>

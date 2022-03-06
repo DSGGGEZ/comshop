@@ -3,10 +3,9 @@
 	session_start();
 
 	if(isset($_SESSION['customer'])){
-		$cid=$_SESSION['customer'];
-		$sql = "SELECT * FROM customer WHERE CID = $cid";
+		$sql = "SELECT * FROM customer WHERE CID = CID";
 		$query = $conn->query($sql);
-		$customer = $query->fetch_assoc();
+		$student = $query->fetch_assoc();
 	}
 
 ?>

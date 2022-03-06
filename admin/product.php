@@ -90,7 +90,6 @@
                     $sql = "SELECT * FROM product ORDER BY PID";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
-
                       echo "
                         <tr>
                           <td class='hidden'></td>

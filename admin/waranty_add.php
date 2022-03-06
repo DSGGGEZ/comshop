@@ -3,8 +3,8 @@
 	if(isset($_POST['add'])){
 		$PID = $_POST['PID'];
 		$CID = $_POST['CID'];
-		$BoughtDate = date('Y-m-d');
-		$WarantyExpire = date('Y-m-d', strtotime($BoughtDate .'+3 years'));
+		$BoughtDate = $_POST['BoughtDate'];
+		$WarantyExpire = $_POST['WarantyExpire'];
 
 		$sql = "INSERT INTO iteminaccount(PID, CID, BoughtDate, WarantyExpire) VALUES ('$PID', '$CID', '$BoughtDate', '$WarantyExpire')";
 		if($conn->query($sql)){

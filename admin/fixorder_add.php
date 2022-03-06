@@ -2,6 +2,8 @@
 	include 'includes/session.php';
 
 	if(isset($_POST['add'])){
+		$orderid = $_POST['OrderID'];
+		$caseid = $_POST['CaseID'];
 		$ctid = $_POST['CTID'];
 		$cid = $_POST['CID'];
 		$caseid = $_POST['CaseID'];
@@ -9,7 +11,7 @@
 		$casetype = $_POST['CaseType'];
 		$detail = $_POST['Detail'];
 		
-		$sql = "INSERT INTO fixorder(CTID, CID, CaseID, CaseDate, CaseType, Detail) VALUES ('$ctid', '$cid', '$caseid', '$casedate', '$casetype' , '$detail')";
+		$sql = "INSERT INTO fixorder(OrderID, CaseID, CTID, CID, CaseDate, CaseType, Detail) VALUES ('$orderid' , '$caseid', '$ctid', '$cid', '$casedate', '$casetype' , '$detail')";
 		if($conn->query($sql)){
 			$_SESSION['success'] = 'Fixorder added successfully';
 		}

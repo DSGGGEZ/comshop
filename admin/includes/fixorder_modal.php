@@ -1,8 +1,4 @@
-<?php
-if(!isset($conn)){
-  include 'includes/conn.php';
-}
-?>
+<!-- Add -->
 <div class="modal fade" id="addnew">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -14,52 +10,28 @@ if(!isset($conn)){
             <div class="modal-body">
               <form class="form-horizontal" method="POST" action="fixorder_add.php">
                 <div class="form-group">
-                
+                    <label for="name" class="col-sm-3 control-label">OrderID</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="OrderID" name="OrderID" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name" class="col-sm-3 control-label">CaseID</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="CaseID" name="CaseID" required>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="name" class="col-sm-3 control-label">CTID</label>
                     <div class="col-sm-9">
-                    <select class="form-control" name="CTID" id="CTID" required="">
-                        <option value="" selected="" disabled=""></option>
-                        <?php  
-                            $ctid = "SELECT * FROM comtech";
-                            $ctqry = $conn->query($ctid);
-                            while($row = $ctqry->fetch_array()):
-                        ?>
-                          <option value="<?php echo $row['CTID'] ?>"><?php echo ucwords($row['FirstName'].' '.$row['LastName']) . ' ['.$row['CTID'].']' ?></option>
-                        <?php endwhile;  ?>
-                      </select>
-                      </div>
+                      <input type="text" class="form-control" id="CTID" name="CTID" required>
+                    </div>
                 </div>
                 <div class="form-group">
-               
-                    <label for="CID" class="col-sm-3 control-label">CID</label>
+                    <label for="name" class="col-sm-3 control-label">CID</label>
                     <div class="col-sm-9">
-                    <select class="form-control" name="CID" id="CID" required="">
-                        <option value="" selected="" disabled=""></option>
-                        <?php  
-                            $cid = "SELECT * FROM customer";
-                            $cqry = $conn->query($cid);
-                            while($row = $cqry->fetch_array()):
-                        ?>
-                          <option value="<?php echo $row['CID'] ?>"><?php echo ucwords($row['FirstName'].' '.$row['LastName']) . ' ['.$row['CID'].']' ?></option>
-                        <?php endwhile;  ?>
-                      </select>
-                      </div>
-                </div>
-                <div class="form-group">
-                
-                    <label for="CaseID" class="col-sm-3 control-label">CaseID</label>
-                    <div class="col-sm-9">
-                    <select class="form-control" name="CaseID" id="CaseID" required="">
-                        <option value="" selected="" disabled=""></option>
-                        <?php  
-                            $cid = "SELECT * FROM casetype";
-                            $cqry = $conn->query($cid);
-                            while($row = $cqry->fetch_array()):
-                        ?>
-                          <option value="<?php echo $row['CaseID'] ?>"><?php echo ucwords($row['CaseID'].' '.$row['CaseType'])?></option>
-                        <?php endwhile;  ?>
-                      </select>
-                      </div>
+                      <input type="text" class="form-control" id="CID" name="CID" required>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="name" class="col-sm-3 control-label">CaseDate</label>

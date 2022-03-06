@@ -1,108 +1,119 @@
 <?php include 'includes/session.php'; ?>
+<?php
+$where = '';
+if (isset($_GET['category'])) {
+	$catid = $_GET['category'];
+	$where = 'WHERE category_id = ' . $catid;
+}
+?>
 <?php include 'includes/header.php'; ?>
+
 <body class="hold-transition skin-blue layout-top-nav">
-<div class="wrapper">
+	<div class="wrapper">
 
-	<?php include 'includes/navbar.php'; ?>
+		<?php include 'includes/navbar.php'; ?>
 
-	  <div class="content-wrapper">
-	    <div class="container">
+		<div class="content-wrapper">
+			<div class="container">
 
-	      <!-- Main content -->
-	      <section class="content">
-	        <div class="row">
-	        	<div class="col-sm-8 col-sm-offset-2">
-	        		<?php
-	        			if(isset($_SESSION['error'])){
-	        				echo "
+				<!-- Main content -->
+				<section class="content">
+					<div class="row">
+						<div class="col-sm-8 col-sm-offset-2">
+							<?php
+							if (isset($_SESSION['error'])) {
+								echo "
 	        					<div class='alert alert-danger'>
-	        						".$_SESSION['error']."
+	        						" . $_SESSION['error'] . "
 	        					</div>
 	        				";
-	        				unset($_SESSION['error']);
-	        			}
-	        		?>
-	        		<div class="box">
-					<div class="box-header with-border">
-							<h3>Product List</h3>
-	        			</div>
-	        			<div class="box-header with-border">
-	        			</div>
-	        			<div class="box-body">
-							
-	        				<table class="table table-bordered table-striped" id="booklist">
-			        			<thead>
-			        				<th>Brand</th>
-			        				<th>Spec</th>
-			        				<th>Type</th>
-			        				<th>Price</th>
-									<th>Status</th>
-			        			</thead>
-			        			<tbody>
-			        			<?php
-			        				$sql = "SELECT * FROM product";
-			        				$query = $conn->query($sql);
-			        				while($row = $query->fetch_assoc()){
-									?>
-			        					<tr>
-			        						<td><?php echo $row['Brand']?></td>
-			        						<td><?php echo $row['Spec']?></td>
-											<td><?php echo $row['ProductType']?></td>
-											<td><?php echo $row['Price']?></td>
-											<td>
-												<a href="buy.php?PID=<?php echo $row['PID'] ?>?price=<?php echo $row['Price'] ?>" class="btn btn-success" role="button">Buy now</a>
-											</td>
-			        					</tr>
+								unset($_SESSION['error']);
+							}
+							?>
+							<div class="box">
+								<div class="box-header with-border">
+									<div class="input-group">
 										<?php
+										if (isset($_POST['search'])) {
+											$search = $_POST['search'];
+											$sql = "SELECT * FROM product WHERE Brand LIKE '%$search%'";
+										} else {
+											$sql  = "SELECT * FROM product $where";
 										}
-									?>
-			        			</tbody>
-			        		</table>
-	        			</div>
-	        		</div>
-	        	</div>
-	        </div>
-	      </section>
+										$query = $conn->query($sql)
+										?>
+										<form action="" method="post">
+											<div class="input-group">
+												<div class="form-outline"> <input type="search" id="search" name="search" class="form-control" placeholder="Search by movie name" value="<?php echo @$_POST['search']; ?>" /> </div>
+												<span class="input-group-btn">
+												<button type="submit" class="btn btn-primary">serch</button>
+												</span>
+											</div>
+											<!-- <div class="input-group">
+  <div class="form-outline">
+    <input type="search" id="form1" class="form-control" />
+    <label class="form-label" for="form1">Search</label>
+  </div>
+  <button type="button" class="btn btn-primary">
+    <i class="fas fa-search"></i>
+  </button>
+</div> -->
+										</form>
+									</div>
+								</div>
+								<div class="box-body">
 
-	    </div>
-	  </div>
+									<table class="table table-bordered table-striped" id="booklist">
+										<thead>
+											<th>Brand</th>
+											<th>Spec</th>
+											<th>Type</th>
+											<th>Price</th>
+											<th>Status</th>
+										</thead>
+										<tbody>
+											<?php
+											while ($row = $query->fetch_assoc()) {
+												echo "
+			        						<tr>
+			        							<td>" . $row['Brand'] . "</td>
+			        							<td>" . $row['Spec'] . "</td>
+												<td>" . $row['ProductType'] . "</td>
+												<td>" . $row['Price'] . "</td>
+												<td>
+													<button class='btn btn-success btn-sm edit btn-flat' data-id='" . $row['id'] . "'><i class='fa fa-shopping-cart'></i> Add to Account</button>
+												</td>
+			        						</tr>
+			        					";
+											}
+											?>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
 
-  	<?php include 'includes/footer.php'; ?>
-</div>
-<?php include 'includes/scripts.php'; ?>
-<script>
-$(function(){
-  $(document).on('click', '.edit', function(e){
-    e.preventDefault();
-    $('#edit').modal('show');
-    var id = $(this).data('id');
-    getRow(id);
-  });
+			</div>
+		</div>
 
-  $(document).on('click', '.delete', function(e){
-    e.preventDefault();
-    $('#delete').modal('show');
-    var id = $(this).data('id');
-    getRow(id);
-  });
-});
+		<?php include 'includes/footer.php'; ?>
+	</div>
 
-function getRow(id){
-  $.ajax({
-    type: 'POST',
-    url: 'buy_row.php',
-    data: {id:id},
-    dataType: 'json',
-    success: function(response){
-      $('.id').val(response.id);
-      $('#edit_PID').val(response.PID);
-      $('#edit_CID').val(response.CID);
-      $('#edit_BoughtDate').val(response.BoughtDate);
-      $('#edit_WarantyExpire').val(response.WarantyExpire);
-      $('.del_war').html(response.PID+' '+response.CID+' '+response.Spec);
-    }
-  });
-}
-</script>
+	<?php include 'includes/scripts.php'; ?>
+	<script>
+		$(function() {
+			$('#catlist').on('change', function() {
+				if ($(this).val() == 0) {
+					window.location = 'index.php';
+				} else {
+					window.location = 'index.php?category=' + $(this).val();
+				}
+
+			});
+		});
+	</script>
 </body>
+
 </html>
